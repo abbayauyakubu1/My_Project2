@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Readora Store</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    /* 🔹 Header */
+    header {
+      background-color: #2a2a44;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      color: #ffc107;
+      font-size: 29px;
+    }
+    header h1:hover {
+      color: #fff;
+    }
+
+     nav {
+      display: flex;
+      flex-wrap: wrap;
+      transition: max-height 0.3s ease;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    
+
+    /* 🔹 Hamburger Button */
+    .menu-btn {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-btn div {
+      width: 30px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+      transition: 0.3s;
+      
+    }
+
+
+    /* 🔹 Hero Section */
+    .hero {
+      background: linear-gradient(to right, #007bff, #00bcd4);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+    }
+
+    /* 🔹 Products */
+    .products {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+    }
+
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .product h3 {
+      margin: 10px 0;
+      color: #007bff;
+      font-size: 18px;
+    }
+
+    .product p {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .product button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .product button:hover {
+      background-color: #0056b3;
+    }
+
+    /* 🔹 Footer */
+    footer {
+      background-color: #1e1e2f;
+      color: #ccc;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 15px;
+      margin-top: 50px;
+    }
+
+    /* 🔸 Responsive Design */
+
+    /* Tablets (768px and below) */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 22px;
+        margin-bottom: 10px;
+      }
+
+      nav a {
+        font-size: 15px;
+        margin: 5px 8px;
+      }
+
+      .hero {
+        padding: 60px 20px;
+      }
+
+      .hero h2 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .products {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+      }
+    }
+
+    /* Smartphones (480px and below) */
+    @media (max-width: 480px) {
+      header {
+        padding: 15px;
+      }
+
+      header h1 {
+        font-size: 20px;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      nav a {
+        display: block;
+        margin: 8px 0;
+      }
+
+      .hero {
+        padding: 50px 15px;
+      }
+
+      .hero h2 {
+        font-size: 22px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        font-size: 13px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Abba Store</h1>
+
+    <!-- Hamburger Menu -->
+    <div class="menu-btn" id="menu-btn">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <nav id="menu">
+      <a href="#home">Home</a>
+      <a href="#blogs">Shop</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h2>Welcome to Readora Store</h2>
+    <p>Shop smart, shop easy — quality products at your fingertips.</p>
+  </section>
+
+  <section class="products" id="shop">
+    <div class="product">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRq2G1_oOLOy4prfUTcZoVLnmEFWzkslzfWGQ&s" alt="Product 1" />
+      <h3>Smart Watch</h3>
+      <p>₦25,000</p>
+      <button onclick="addToCart('Smart Watch', 25000)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDj-CEOkWnKgbfWbnaX_UztDAh3VQCkKAmiw&s" alt="Product 2" />
+      <h3>Wireless Earbuds</h3>
+      <p>₦15,000</p>
+      <button onclick="addToCart('Wireless Earbuds', 15000)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREQC3KFIK-2Ib-8fcoXAwgp53ve1F0se0OiA&s" alt="Product 3" />
+      <h3>Bluetooth Speaker</h3>
+      <p>₦18,000</p>
+      <button onclick="addToCart('Bluetooth Speaker', 18000)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzIzRuuZZmF20th38kjonJ6lAyKhRpEW78tA&s" alt="Product 4" />
+      <h3>Smartphone</h3>
+      <p>₦75,000</p>
+      <button onclick="addToCart('Smartphone', 75000)">Add to Cart</button>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p>📞 Contact: +234 812 345 6789 | ✉️ support@readorastore.com</p>
+    <p>© 2025 Readora Store. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Toggle hamburger menu
+    const menuBtn = document.getElementById("menu-btn");
+    const menu = document.getElementById("menu");
+
+    menuBtn.addEventListener("click", () => {
+      menu.classList.toggle("show");
+    });
+  </script>
+</body>
+</html>
