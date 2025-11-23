@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Receipt</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #121212;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: #2a2a44;
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease-in-out;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #ccc;
+      font-size: 0.95rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      margin-bottom: 15px;
+      background: #1e1e2f;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: scale(1.03);
+    }
+
+    .receipt {
+      background: #1b1b2e;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      display: none;
+      color: #ddd;
+    }
+
+    .receipt h3 {
+      text-align: center;
+      color: #4caf50;
+    }
+
+    .receipt p {
+      margin: 8px 0;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+      font-size: 0.95rem;
+    }
+
+    /* Smartphones (max-width: 600px) */
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .container {
+        width: 100%;
+        padding: 15px;
+        border-radius: 10px;
+      }
+      h2 {
+        font-size: 1.3rem;
+      }
+      input, button {
+        font-size: 15px;
+      }
+    }
+
+    /* Tablets (768px - 768px) */
+    @media (min-width: 768px) and (max-width: 768px) {
+      .container {
+        width: 120%;
+        max-width: 500px;
+        padding: 25px;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      input, button {
+        font-size: 16px;
+      }
+    }
+
+    /* Desktop (1024px and above) */
+    @media (min-width: 1024px) {
+      .container {
+        max-width: 500px;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Payment Receipt Generator</h2>
+
+    <label for="name">Customer Name</label>
+    <input type="text" id="name" placeholder="Enter full name" />
+
+    <label for="amount">Amount Paid</label>
+    <input type="number" id="amount" placeholder="Enter amount" />
+
+    <label for="method">Payment Method</label>
+    <input type="text" id="method" placeholder="e.g. Cash, Card, Transfer" />
+
+    <button onclick="generateReceipt()">Generate Receipt</button>
+
+    <div class="receipt" id="receiptBox">
+      <h3>Payment Receipt</h3>
+      <p><strong>Name:</strong> <span id="rName"></span></p>
+      <p><strong>Amount:</strong> ₦<span id="rAmount"></span></p>
+      <p><strong>Method:</strong> <span id="rMethod"></span></p>
+      <p><strong>Date:</strong> <span id="rDate"></span></p>
+    </div>
+  </div>
+
+  <script>
+    function generateReceipt() {
+      const name = document.getElementById("name").value;
+      const amount = document.getElementById("amount").value;
+      const method = document.getElementById("method").value;
+      
+
+      if (name === "" || amount === "" || method === "") {
+        alert("Please fill all fields before generating receipt!");
+        return;
+      }
+
+      const date = new Date().toLocaleString();
+
+      document.getElementById("rName").innerText = name;
+      document.getElementById("rAmount").innerText = Number(amount).toLocaleString();
+      document.getElementById("rMethod").innerText = method;
+      document.getElementById("rDate").innerText = date;
+
+      document.getElementById("receiptBox").style.display = "block";
+    }
+  </script>
+</body>
+</html>
