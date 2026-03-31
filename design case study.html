@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hangout – Design Case Study</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --yellow:     #fbbf24;
+      --yellow-d:   #f59e0b;
+      --dark:       #0a0a0a;
+      --gray:       #888;
+      --text:       #ffffff;
+      --radius:     26px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #121212;
+      color: var(--text);
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+    }
+
+    .stage {
+      width: 100%;
+      max-width: 1280px;
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      max-height: 640px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 30px 90px rgba(0,0,0,0.65);
+    }
+
+    .preview {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(3px) brightness(0.75);
+      transform: scale(1.06);
+      transition: transform 0.8s ease;
+    }
+
+    .hero:hover .preview {
+      transform: scale(1.12);
+    }
+
+    .dark-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(0,0,0,0.82) 0%,
+        rgba(0,0,0,0.38) 50%,
+        rgba(0,0,0,0.12) 75%
+      );
+      z-index: 1;
+    }
+
+    .yellow-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 35%,
+        rgba(251,191,36,0.28) 85%,
+        rgba(251,191,36,0.45) 100%
+      );
+      z-index: 1;
+    }
+
+    /* Navigation */
+    .nav {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 2.8rem;
+      font-size: 0.92rem;
+      color: #eee;
+    }
+
+    .brand {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--yellow);
+    }
+
+    .nav ul {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+      font-weight: 500;
+    }
+
+    .nav ul li {
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .nav ul li:hover {
+      color: var(--yellow);
+    }
+
+    .nav button {
+      background: var(--yellow);
+      color: #111;
+      border: none;
+      padding: 0.55rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.22s;
+    }
+
+    .nav button:hover {
+      background: var(--yellow-d);
+      transform: translateY(-1px);
+    }
+
+    /* Main content */
+    .content {
+      position: absolute;
+      left: 4rem;
+      bottom: 4.5rem;
+      z-index: 4;
+      color: white;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .icon {
+      width: 56px;
+      height: 56px;
+      background: var(--yellow);
+      border-radius: 14px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .icon::after {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      background: #111;
+      border-radius: 6px;
+    }
+
+    .logo h1 {
+      font-size: clamp(2.1rem, 5vw, 2.8rem);
+      font-weight: 800;
+    }
+
+    .subtitle {
+      font-size: 0.88rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 1.8rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.5rem 1.3rem;
+      background: var(--yellow);
+      color: #111;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    /* Triangles */
+    .triangle {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      opacity: 0.85;
+      z-index: 2;
+    }
+
+    .t1 {
+      border-width: 0 55px 95px 55px;
+      border-color: transparent transparent var(--yellow) transparent;
+      top: 14%;
+      left: 48%;
+      transform: rotate(-10deg);
+    }
+
+    .t2 {
+      border-width: 0 40px 75px 40px;
+      border-color: transparent transparent var(--yellow) transparent;
+      top: 28%;
+      right: 18%;
+      transform: rotate(15deg);
+    }
+
+    .t3 {
+      border-width: 0 35px 65px 35px;
+      border-color: transparent transparent var(--yellow) transparent;
+      bottom: 18%;
+      right: 26%;
+      transform: rotate(-8deg);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .nav ul {
+        gap: 1.4rem;
+      }
+
+      .content {
+        left: 3rem;
+        bottom: 3.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stage {
+        padding: 1rem;
+      }
+
+      .hero {
+        aspect-ratio: 4 / 5;
+        max-height: none;
+      }
+
+      .nav {
+        padding: 1.2rem 1.8rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .nav ul {
+        display: none; /* or make hamburger later */
+      }
+
+      .content {
+        position: relative;
+        left: 0;
+        bottom: 0;
+        padding: 3rem 2.5rem 4rem;
+        text-align: center;
+      }
+
+      .logo {
+        justify-content: center;
+      }
+
+      .t1, .t2, .t3 {
+        opacity: 0.65;
+        transform: scale(0.7);
+      }
+
+      .t1 { top: 12%; left: 55%; }
+      .t2 { top: 32%; right: 15%; }
+      .t3 { bottom: 15%; right: 22%; }
+    }
+
+    @media (max-width: 480px) {
+      .logo h1 {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 0.75rem;
+        letter-spacing: 4px;
+      }
+
+      .tag {
+        font-size: 0.78rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stage">
+    <div class="hero">
+
+      <!-- Replace with your real website/app preview image -->
+      <img 
+        src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=2000&q=90" 
+        alt="Hangout website preview" 
+        class="preview"
+      />
+
+      <div class="dark-gradient"></div>
+      <div class="yellow-gradient"></div>
+
+      <nav class="nav">
+        <span class="brand">Hangout</span>
+        <ul>
+          <li>Topics</li>
+          <li>How it works</li>
+          <li>Categories</li>
+          <li>Features</li>
+          <li>Locations</li>
+        </ul>
+        <button>Start Now</button>
+      </nav>
+
+      <span class="triangle t1"></span>
+      <span class="triangle t2"></span>
+      <span class="triangle t3"></span>
+
+      <div class="content">
+        <div class="logo">
+          <div class="icon"></div>
+          <h1>Hangout</h1>
+        </div>
+        <p class="subtitle">DESIGN CASE STUDY</p>
+        <span class="tag">Mobile</span>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

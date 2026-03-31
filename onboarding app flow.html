@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangaut Onboarding - Left Aligned Images</title>
+    <style>
+        :root {
+            --brand-orange: #ffa500;
+            --text-main: #333;
+            --text-sub: #888;
+            --white: #ffffff;
+            --bg-color: #ffa500;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+
+        body {
+            background-color: var(--bg-color);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .onboarding-container {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .onboarding-card {
+            background: var(--white);
+            border-radius: 40px;
+            display: flex;
+            /* Changed to row-reverse to put Image (last in HTML) on the Left */
+            flex-direction: row-reverse; 
+            overflow: hidden;
+            min-height: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        /* Text Styling (Now on the Right) */
+        .text-content {
+            flex: 1;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 26px;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .description {
+            font-size: 15px;
+            color: var(--text-sub);
+            line-height: 1.6;
+            max-width: 340px;
+            margin-bottom: 30px;
+        }
+
+        /* Pagination Dots */
+        .pagination {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #eee;
+            border-radius: 50%;
+        }
+
+        .dot.active {
+            background: var(--brand-orange);
+            width: 8px;
+            border-radius: 10px;
+        }
+
+        /* Actions */
+        .actions {
+            width: 100%;
+            max-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn-next {
+            background: var(--brand-orange);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 35px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-next:hover { transform: translateY(-2px); }
+
+        .skip {
+            color: var(--text-sub);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Image Styling (Now on the Left) */
+        .image-content {
+            flex: 1.2;
+            position: relative;
+            margin: 20px;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .image-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .logo-overlay {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            z-index: 10;
+        }
+
+        /* --- RESPONSIVE BREAKPOINTS --- */
+
+        @media (max-width: 992px) {
+            .onboarding-card { min-height: 450px; }
+            .text-content { padding: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            
+            .onboarding-card {
+                /* On mobile, stack Image on TOP of Text */
+                flex-direction: column-reverse; 
+                border-radius: 30px;
+            }
+
+            .image-content {
+                height: 300px;
+                margin: 10px;
+                flex: none;
+            }
+
+            .text-content {
+                padding: 30px 20px 40px 20px;
+            }
+
+            .title { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="onboarding-container">
+    <h1 class="section-title">Onboarding Pages</h1>
+
+    <section class="onboarding-card">
+        <div class="text-content">
+            <h2 class="title">Find Your Perfect Vibe</h2>
+            <p class="description">From rooftop parties to chill content shoots, Hangaut connects you with spaces that match your energy.</p>
+            <div class="pagination">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="actions">
+                <button class="btn-next">Next</button>
+                <a href="#" class="skip">Skip</a>
+            </div>
+        </div>
+        <div class="image-content">
+            <span class="logo-overlay">Hangaut</span>
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Beach sunset">
+        </div>
+    </section>
+
+    <section class="onboarding-card">
+        <div class="text-content">
+            <h2 class="title">Plan in Minutes, Vibe for Hours</h2>
+            <p class="description">Search, book, and manage your hangouts all in one place. It's never been this easy.</p>
+            <div class="pagination">
+                <span class="dot"></span>
+                <span class="dot active"></span>
+                <span class="dot"></span>
+            </div>
+            <div class="actions">
+                <button class="btn-next">Next</button>
+                <a href="#" class="skip">Skip</a>
+            </div>
+        </div>
+        <div class="image-content">
+            <span class="logo-overlay">Hangaut</span>
+            <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80" alt="Group at party">
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
